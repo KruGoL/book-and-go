@@ -1,0 +1,192 @@
+.draggable-panel
+    position: relative
+    width: 100%
+    height: 100%
+    overflow: hidden
+    background: #ebebeb
+    outline: none
+    -webkit-touch-callout: none
+    -webkit-user-select: none
+    -moz-user-select: none
+    -ms-user-select: none
+
+    *
+        outline: none
+
+    &.lock
+        .chart-item
+            &:hover
+                filter: none
+
+    .bgImg
+        width: 100%
+        height: 100%
+        
+    .canvas
+        position: relative
+        background: #FFFFFF
+        box-shadow: 0 5px 130px rgba(#000000, .15)
+
+        &.moving
+            cursor: move
+
+        &::after
+            content: ''
+            position: absolute
+            top: 0
+            left: 0
+            width: 100%
+            height: 100%
+            background: rgba(#d1fff3, .3)
+            visibility: hidden
+            opacity: 0
+            transition: all .3s
+            z-index: 10000
+
+        &.out-canvas-dragover::after
+            visibility: visible
+            opacity: 1
+
+    .chart-item
+        display: flex
+        position: absolute
+        justify-content: center
+        background: $positive
+        backdrop-filter: blur(100px)
+        -webkit-backdrop-filter: blur(10px)
+        border-radius: '25px' !important
+
+        &.selected
+            background: $info !important
+            
+        .content
+            position: relative
+            width: 100%
+            height: 100%
+            overflow: hidden
+            z-index: 10
+
+        &:hover
+            filter: brightness(1.25)
+
+
+        &.moving .resizable-point
+            display: none !important
+
+        .resizable
+            left   : 0
+            top    : 0
+            position: absolute
+            $size: 16px
+            $offset: -8px
+
+            .resizable-point
+                position: absolute
+                width: $size
+                height: $size
+                display: flex
+                flex-direction: row
+                justify-content: center
+                align-items: center
+                z-index: 20
+
+                &::after
+                    content: ''
+                    display: block
+                    width: 8px
+                    height: 8px
+                    border: 2px solid #008763
+                    background: #FFFFFF
+
+            .resizable-line
+                position: absolute
+                box-sizing: border-box
+                z-index: 10
+
+                &::after
+                    content: ''
+                    display: block
+                    width: 100%
+                    height: 100%
+                    background: #008763
+
+            // Point control
+            .a
+                top: 0
+                left: 0
+                transform: translate(-50%, -50%)
+                cursor: nwse-resize
+
+            .b
+                top: 0
+                right: 0
+                transform: translate(50%, -50%)
+                cursor: nesw-resize
+
+            .c
+                bottom: 0
+                right: 0
+                transform: translate(50%, 50%)
+                cursor: nwse-resize
+
+            .d
+                bottom: 0
+                left: 0
+                transform: translate(-50%, 50%)
+                cursor: nesw-resize
+
+            // Point center
+            .e, .f, .g, .h
+                pointer-events: none
+
+            .e
+                top: 0
+                left: 50%
+                margin-left: $offset
+                transform: translate(0, -50%)
+
+            .f
+                top: 50%
+                right: 0
+                margin-top: $offset
+                transform: translate(50%, 0)
+
+            .g
+                bottom: 0
+                left: 50%
+                margin-left: $offset
+                transform: translate(0, 50%)
+
+            .h
+                left: 0
+                top: 50%
+                margin-top: $offset
+                transform: translate(-50%, 0)
+
+            .i
+                top: 0
+                left: 0
+                width: 100% !important
+                height: 2px
+                cursor: ns-resize
+
+            .j
+                right: 0
+                top: 0
+                height: 100% !important
+                width: 2px
+                cursor: ew-resize
+
+            .k
+                bottom: 0
+                left: 0
+                width: 100% !important
+                height: 2px
+                cursor: ns-resize
+
+            .l
+                left: 0
+                top: 0
+                height: 100% !important
+                width: 2px
+                cursor: ew-resize
